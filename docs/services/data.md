@@ -7,22 +7,22 @@ The Data service stores and retrieves data about users, devices, and measurement
 ### Resources
 
 * **Users**
-    * email(uniq?)
+    * email
     * password
-    * username(uniq)
+    * name
 
 * **Devices**
-	* user
-	* kind
+    * device_id
+    * user_id
+    * kind
 
 * **Measurement**
-	* device
-	* kind
-	* value
-	* unit
+    * device_id
+    * kind
+    * value
 
 ### Methods
 
 * **Users**
-	* `validateUser(username, password)`
-		* &rarr; return a **user** or `error` if the user does not exist
+    * `validateUser(username, password)`
+        * &rarr; return a **user** or `error` if the user does not exist
