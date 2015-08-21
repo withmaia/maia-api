@@ -3,5 +3,5 @@
 * **Devices**
 
 	* `validateNewDevice(new_device)`
-		* `Data:validateUser(username,password)`
-		* `Data:createDevice(username,password)`
+		* `Data:validateUser(email, password)`
+		* `Data:createDevice(new_device, user)`
