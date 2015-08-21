@@ -31,6 +31,7 @@ app.post '/measurements.json', (req, res) ->
     {device_id, kind, value, unit} = req.body
     measurement = {device_id, kind, value, unit}
     DataService 'createMeasurement', measurement, (err, new_measurement) ->
+        console.log 'error: ', err if err?
         announce 'maia:create-measurement', {measurement: new_measurement} if !config.LOCAL
         res.json new_measurement
 
