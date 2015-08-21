@@ -35,5 +35,10 @@ app.post '/measurements.json', (req, res) ->
         announce 'maia:create-measurement', {measurement: new_measurement} if !config.LOCAL
         res.json new_measurement
 
+app.get '/devices/:device_id/measurements.json', (req, res) ->
+    {device_id} = req.params
+    DataService 'findMeasurements', {device_id}, (err, measurements) ->
+        res.json measurements
+
 app.start()
 
