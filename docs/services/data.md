@@ -7,12 +7,12 @@ The Data service stores and retrieves data about users, devices, and measurement
 ### Resources
 
 * **Users**
-    * email
+    * email (unique)
     * password
     * name
 
 * **Devices**
-    * device_id
+    * device_id (unique)
     * user_id
     * kind
 
