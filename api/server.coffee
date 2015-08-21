@@ -29,8 +29,8 @@ app.post '/devices.json', (req, res) ->
 # Post a measurement from a device
 app.post '/measurements.json', (req, res) ->
     {device_id, kind, value, unit} = req.body
-    new_measurement = {device_id, kind, value, unit}
-    DataService 'createMeasurement', new_measurement, (err, new_measurement) ->
+    measurement = {device_id, kind, value, unit}
+    DataService 'createMeasurement', measurement, (err, new_measurement) ->
         announce 'maia:create-measurement', {measurement: new_measurement} if !config.LOCAL
         res.json new_measurement
 
