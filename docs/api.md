@@ -4,12 +4,12 @@
 
 * **Devices**
 
-	* **POST** `/devices.json {username, password, kind, serial}`
-		* `Engine:validateNewDevice`
-		* &rarr; new **Device** and http://withmaia.com/devices/<device_id>
+    * **POST** `/devices.json {username, password, device_id, kind}`
+        * `Engine:validateNewDevice`
+        * &rarr; new **Device**
 
 * **Measurements**
 
-	* **POST** `/measurements.json {device_id, kind, value, unit}`
-		* `Data:createMeasurement`
-		* &rarr; new **Measurement**
+    * **POST** `/measurements.json {device_id, kind, value, unit}`
+        * `Data:createMeasurement`
+        * &rarr; new **Measurement**
