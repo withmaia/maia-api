@@ -4,8 +4,8 @@ somata = require 'somata'
 
 somata_client = new somata.Client
 
-DataService = somata_client.bindRemote 'maia-api:data'
-EngineService = somata_client.bindRemote 'maia-api:engine'
+DataService = somata_client.bindRemote 'maia:data'
+EngineService = somata_client.bindRemote 'maia:engine'
 
 app = polar config.api
 
@@ -15,8 +15,8 @@ app.get '/', (req, res) ->
 
 # Post a new device with user credentials for validation
 app.post '/devices.json', (req, res) ->
-    {device_id, kind, device_id, username, password} = req.body
-    user = {username, password}
+    {device_id, kind, device_id, email, password} = req.body
+    user = {email, password}
     device = {device_id, kind}
     EngineService 'validateNewDevice', user, device, (err, new_device) ->
         if err?
@@ -32,3 +32,4 @@ app.post '/measurements.json', (req, res) ->
         res.json new_measurement
 
 app.start()
+
