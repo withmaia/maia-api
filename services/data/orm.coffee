@@ -23,7 +23,7 @@ class Collection
         mongo.db.collection(@collection).count query, (err, n) => cb err, n
     @insert: (item, cb) ->
         mongo.db.collection(@collection).insert item, (err, inserted) =>
-            cb err, (@coerce(item) for item in inserted)
+            cb err, inserted.map (i) => @coerce(i)
     @update: (query, item, options, cb) ->
         if !cb
             cb = options
