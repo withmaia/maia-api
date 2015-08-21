@@ -1,6 +1,7 @@
 _ = require 'underscore'
 somata = require 'somata'
 announce = require 'nexus-announce'
+config = require '../config'
 
 somata_client = new somata.Client
 DataService = somata_client.bindRemote 'maia:data'
