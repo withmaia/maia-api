@@ -15,9 +15,9 @@ app.get '/', (req, res) ->
 
 # Post a new device with user credentials for validation
 app.post '/devices.json', (req, res) ->
-    {device_id, kind, device_id, email, password} = req.body
-    user = {email, password}
+    {device_id, kind, email, password} = req.body
     device = {device_id, kind}
+    user = {email, password}
     EngineService 'validateNewDevice', user, device, (err, new_device) ->
         if err?
             res.json success: false, error: err
