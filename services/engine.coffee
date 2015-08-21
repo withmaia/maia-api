@@ -7,6 +7,7 @@ DataService = somata_client.bindRemote 'maia:data'
 validateNewDevice = (user, new_device, cb) ->
     DataService 'getUser', user, (err, user) ->
         if user?
+            new_device.user_id = user._id
             DataService 'createDevice', new_device, cb
         else
             cb "User invalid"
