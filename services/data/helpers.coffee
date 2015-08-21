@@ -7,6 +7,13 @@ is_static_url = (url) -> url.split('.').slice(-1)[0] in static_exts
 # Capitalize the first letter of a string
 capitalize = (type) -> type[0].toUpperCase() + type.slice(1)
 
+summarize = (o) ->
+    so = util.inspect(o).replace(/\s+/g, ' ')
+    if so.length > 50
+        return so.slice(0, 50) + '...'
+    else
+        return so
+
 # Generate a random alphanumeric string
 randomString = (len=8) ->
     s = ''
@@ -34,6 +41,7 @@ module.exports = {
     static_exts
     is_static_url
     capitalize
+    summarize
     randomString
     randomChoice
     minsAgo

@@ -2,7 +2,7 @@ util = require 'util'
 _ = require 'underscore'
 orm = require './orm'
 
-{capitalize} = require './helpers'
+{capitalize, summarize} = require './helpers'
 
 # General
 # ------------------------------------------------------------------------------
@@ -13,7 +13,6 @@ module.exports = (schema) ->
     # Get, Create, Update, and Remove methods for each type in the schema
     Object.keys(schema).map (__type) ->
         _type = schema[__type]
-        console.log 'make generic for', _type
         _types = _type.collection
         _Type = capitalize _type.singular
         _Types = capitalize _type.collection
@@ -22,7 +21,7 @@ module.exports = (schema) ->
             for qk, qv of query
                 if qk.match /_id$/
                     query[qk] = orm.oid qv
-            console.log "[get#{ _Type }] #{ util.inspect query }"
+            console.log "[get#{ _Type }]", summarize query
             _type.findOne query, (err, got) ->
                 console.log "[get#{ _Type }] ERROR #{err}" if err
                 cb err, got
@@ -31,7 +30,7 @@ module.exports = (schema) ->
             for qk, qv of query
                 if qk.match /_id$/
                     qv = orm.oid qv
-            console.log "[find#{ _Types }] #{ util.inspect query }"
+            console.log "[find#{ _Types }]", summarize query
             _type.findArray query, cb
 
         data_methods['get' + _Types] = (query, cb) ->
@@ -39,7 +38,7 @@ module.exports = (schema) ->
 
         data_methods['create' + _Type] = (item, cb) ->
             _type.insert item, (err, inserted) ->
-                console.log 'created a ' + item
+                console.log "[create#{ _Type }]", summarize item
                 cb err, inserted[0]
 
         data_methods['update' + _Type] = (item_id, item, cb) ->
