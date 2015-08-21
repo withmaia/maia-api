@@ -24,5 +24,5 @@ The Data service stores and retrieves data about users, devices, and measurement
 ### Methods
 
 * **Users**
-    * `validateUser(username, password)`
+    * `validateUser(email, password)`
         * &rarr; return a **user** or `error` if the user does not exist
