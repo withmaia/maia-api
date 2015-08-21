@@ -14,7 +14,7 @@ class Collection
             .limit(options.limit || 99999)
             .toArray (err, found) =>
                 found = [] if !found
-                cb err, (@coerce(item) for item in found)
+                cb err, found.map (i) => @coerce(i)
     @find: (query) ->
         mongo.db.collection(@collection).find(query)
     @findOne: (query, cb) ->
@@ -23,7 +23,7 @@ class Collection
         mongo.db.collection(@collection).count query, (err, n) => cb err, n
     @insert: (item, cb) ->
         mongo.db.collection(@collection).insert item, (err, inserted) =>
-            cb err, inserted.map (i) => @coerce(i)
+            cb err, inserted?.ops?.map (i) => @coerce(i)
     @update: (query, item, options, cb) ->
         if !cb
             cb = options
