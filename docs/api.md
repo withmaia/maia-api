@@ -4,7 +4,7 @@
 
 * **Devices**
 
-    * **POST** `/devices.json {username, password, device_id, kind}`
+    * **POST** `/devices.json {email, password, device_id, kind}`
         * `Engine:validateNewDevice`
         * &rarr; new **Device**
 
