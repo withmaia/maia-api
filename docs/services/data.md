@@ -19,7 +19,7 @@ The Data service stores and retrieves data about users, devices, and measurement
 	* device
 	* kind
 	* value
-	* units
+	* unit
 
 ### Methods
 
