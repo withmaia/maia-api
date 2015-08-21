@@ -30,4 +30,4 @@ data_methods.loginUser = (username, password, cb) ->
                 else
                     cb "Incorrect username or password"
 
-data_service = new somata.Service 'itsmyurls:data', data_methods
+data_service = new somata.Service 'maia-api:data', data_methods
