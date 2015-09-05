@@ -42,7 +42,7 @@ app.get '/devices/:device_id/measurements.json', (req, res) ->
         res.json measurements
 
 app.get '/cube.color', (req, res) ->
-    BitcoinService 'getPriceColor' (err, color) ->
+    BitcoinService 'getPriceColor', (err, color) ->
         res.end color
 
 app.start()
