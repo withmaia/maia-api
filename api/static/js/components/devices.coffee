@@ -16,6 +16,8 @@ DevicesView = React.createClass
 
     render: ->
         <div className='devices-list'>
+            <h1>My Devices</h1>
+            <p className='help'>{"Here are the devices you have connected with Maia. Select a device to <view its data> or <set up hooks>"}</p>
             {@state.items.map (d) ->
                 <DeviceListItem item=d />
             }

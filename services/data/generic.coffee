@@ -38,7 +38,8 @@ module.exports = (schema) ->
 
         data_methods['create' + _Type] = (item, cb) ->
             _type.insert item, (err, inserted) ->
-                console.log "[create#{ _Type }]", summarize item
+                console.log 'error', err if err?
+                console.log "[create#{ _Type }]", summarize inserted
                 cb err, inserted[0]
 
         data_methods['update' + _Type] = (item_id, item, cb) ->

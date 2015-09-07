@@ -1,6 +1,8 @@
 React = require 'react'
 Router = require 'react-router'
 
+{Link} = Router
+
 {Icon} = require './common'
 
 # Base views
@@ -39,15 +41,23 @@ AppView = React.createClass
         route = @getRoutes().slice(-1)[0]
         handler = route.handler
         backButton = <a onClick=@goBack className="back"><Icon icon='chevron-left' /></a>
+            # {if @showHeader()
+            #     <div id="header">
+            #         {if @hasBack() then backButton}
+            #         <span className="title">{@state.title}</span>
+            #     </div>
+            # }
         <div>
-            {if @showHeader()
-                <div id="header">
-                    {if @hasBack() then backButton}
-                    <span className="title">{@state.title}</span>
-                </div>
-            }
+            <div id="nav">
+                <h1>Maia Dashboard</h1>
+                <Link to='devices' > Devices </Link>
+                <Link to='hooks' > Events </Link>
+                <Link to='hooks' > Webhooks </Link>
+            </div>
             <div id="content">
-                <Router.RouteHandler ref='handler' />
+                <div className='container'>
+                    <Router.RouteHandler ref='handler' />
+                </div>
             </div>
         </div>
 

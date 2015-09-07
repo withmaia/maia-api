@@ -1,3 +1,20 @@
+$globals
+    font: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif
+
+$fonts
+    default: 16px $font
+    small: 9px $font
+    medium: 400 25px $font
+    max: 50px/50px $font
+    super: 40px/50px $font
+    head: bold 26px/35px $font
+    subhead: bold 25px/20px $font
+    lead: 300 25px/35px $font
+    sublead: 400 16px/25px $font
+
+$paddings
+    small: 16px
+    medium: 25px
 
 *
     margin: 0
@@ -8,3 +25,62 @@ body
 
 img
     max-width: 100%
+
+a
+    text-decoration: none
+    display: block
+
+.container
+    max-width: 1000px
+    position: relative
+    padding: 0px $paddings.medium
+
+h1
+    font: $fonts.medium
+    font-weight: 200
+    margin-bottom: $paddings.small
+
+.help
+    font: $fonts.default
+    font-weight: 200
+    color: #888
+    max-width: 600px
+    padding-bottom: $paddings.small
+
+#nav
+    position: fixed
+    left: 0px
+    top: 0px
+    bottom: 0px
+    background: #333
+    display: block
+    color: white
+    padding: $paddings.small
+    padding-top: $paddings.medium
+
+    a
+        color: white
+        font: $fonts.default
+        cursor: pointer
+        padding: $paddings.small
+        margin: 0px -$paddings.small
+        &:hover
+            color: #eee
+            background: #252525
+            text-shadow: 2px 0px 8px #000
+
+#content
+    display: block
+    padding-left: 215px
+    padding-top: $paddings.medium
+
+    h2
+        margin-bottom: $paddings.small
+
+.device.item
+    
+    padding-bottom: $paddings.small
+
+    div
+        display: inline-block
+        margin-right: $paddings.small

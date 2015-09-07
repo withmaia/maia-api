@@ -6,6 +6,7 @@ _ = require 'underscore'
 {AppView} = require './components/app'
 {LoginView} = require './components/login'
 {DevicesView, DeviceView, DeviceDataView, DeviceHooksView} = require './components/devices'
+{HooksView} = require './components/hooks'
 {Route, DefaultRoute} = Router
 
 # Routes
@@ -29,6 +30,7 @@ routes =
             <DefaultRoute name="device_data" handler={requireLogin DeviceDataView} />
             <Route name="device_hooks" path="hooks" handler={requireLogin DeviceHooksView} />
         </Route>
+        <Route name="hooks" path="hooks" handler={requireLogin HooksView} />
     </Route>
 
 Router.run routes, (Handler) ->
