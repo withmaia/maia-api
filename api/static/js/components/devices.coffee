@@ -17,7 +17,7 @@ DevicesView = React.createClass
     render: ->
         <div className='devices-list'>
             <h1>My Devices</h1>
-            <p className='help'>{"Here are the devices you have connected with Maia. Select a device to <view its data> or <set up hooks>"}</p>
+            <p className='help'>Here are the devices you have connected with Maia. Select a device to view it's data or set up triggers.</p>
             {@state.items.map (d) ->
                 <DeviceListItem item=d />
             }
@@ -58,7 +58,7 @@ DeviceView = React.createClass
 DeviceDataView = React.createClass
 
     render: ->
-        <div className='device-data'>
+        <div className='device-data card'>
             This is a graph of the device
         </div>
 
@@ -66,7 +66,7 @@ DeviceDataView = React.createClass
 DeviceHooksView = React.createClass
 
     render: ->
-        <div className='device-hooks'>
+        <div className='device-hooks card'>
             This is a page to set up hooks for this device
         </div>
 

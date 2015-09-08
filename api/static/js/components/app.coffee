@@ -41,18 +41,13 @@ AppView = React.createClass
         route = @getRoutes().slice(-1)[0]
         handler = route.handler
         backButton = <a onClick=@goBack className="back"><Icon icon='chevron-left' /></a>
-            # {if @showHeader()
-            #     <div id="header">
-            #         {if @hasBack() then backButton}
-            #         <span className="title">{@state.title}</span>
-            #     </div>
-            # }
+
         <div>
             <div id="nav">
-                <h1>Maia Dashboard</h1>
+                <h1><img className='logo' src='/images/logo-lg.png' /> Maia </h1>
                 <Link to='devices' > Devices </Link>
-                <Link to='hooks' > Events </Link>
-                <Link to='hooks' > Webhooks </Link>
+                <Link to='triggers' > Triggers </Link>
+                <Link to='scripts' > Scripts </Link>
             </div>
             <div id="content">
                 <div className='container'>
