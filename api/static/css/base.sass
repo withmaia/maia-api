@@ -12,9 +12,13 @@ $fonts
     lead: 300 25px/35px $font
     sublead: 400 16px/25px $font
 
+$colors
+    purple: rgb(82, 94, 158)
+
 $paddings
     small: 16px
     medium: 25px
+    medium-large: 36px
 
 *
     margin: 0
@@ -29,6 +33,7 @@ img
 a
     text-decoration: none
     display: block
+    color: $colors.purple
 
 .container
     max-width: 1000px
@@ -39,11 +44,39 @@ a
     background: white
     padding: $paddings.medium
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1)
+    display: block
+    margin: $paddings.small 0px
+
+.tabs
+    background: #EBEBEB
+    padding: 0px 36px
+    margin: 0px -36px
+    margin-bottom: $paddings.medium
+
+    li
+        list-style: none
+        display: inline-block
+
+        a
+            padding: $paddings.small $paddings.medium
+            padding-left: 0px
+            margin-right: $paddings.small
+            cursor: pointer
+
+        &.active
+            border-bottom: 3px solid $colors.purple
 
 h1
     font: $fonts.medium
     font-weight: 200
     margin-bottom: $paddings.small
+
+.back
+    color: #333
+    position: absolute
+    left: -1px
+    top: 5px
+    font-size: 20px
 
 .help
     font: $fonts.default
@@ -51,6 +84,10 @@ h1
     color: #888
     max-width: 600px
     padding-bottom: $paddings.small
+
+.how-to
+    max-width: 400px
+    margin-bottom: $paddings.small
 
 #nav
     position: fixed
@@ -99,3 +136,7 @@ h1
     div
         display: inline-block
         margin-right: $paddings.small
+
+.add-device
+    a
+        display: inline-block

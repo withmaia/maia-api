@@ -16,7 +16,7 @@ TriggersView = React.createClass
     render: ->
         <div className='trigger-list'>
             <h1>My Triggers</h1>
-            <p className='help'>Here are the triggers you have set up with Maia. A trigger can be (e.g.) an SMS alert, telling the cube to bink its status, or turn on the tea.</p>
+            <p className='help'>Here are the triggers you have set up with Maia. A trigger runs a script under certain conditions.</p>
             {@state.items.map (d) ->
                 <TriggerListItem item=d />
             }

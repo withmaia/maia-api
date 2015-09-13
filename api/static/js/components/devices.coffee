@@ -3,9 +3,31 @@ Router = require 'react-router'
 
 {Link, RouteHandler} = Router
 
+{Graph} = require './graph'
+
 {DashboardDispatcher} = require '../dispatcher'
 
 DevicesView = React.createClass
+    mixins: [Router.State]
+
+    render: ->
+        # tabs
+        active_tab = @getPath().split('/').slice(-1)[0]
+        if active_tab == 'add'
+            add_active = 'active'
+        else
+            my_active = 'active'
+
+        <div className='devices-list'>
+            <h1>Devices</h1>
+            <ul className="tabs">
+                <li className={my_active}><Link to="devices" >My</Link></li>
+                <li className={add_active}><Link to="add_device" >Add</Link></li>
+            </ul>
+            <RouteHandler />
+        </div>
+
+DevicesListView = React.createClass
 
     getInitialState: ->
         items: []
@@ -16,7 +38,6 @@ DevicesView = React.createClass
 
     render: ->
         <div className='devices-list'>
-            <h1>My Devices</h1>
             <p className='help'>Here are the devices you have connected with Maia. Select a device to view it's data or set up triggers.</p>
             {@state.items.map (d) ->
                 <DeviceListItem item=d />
@@ -25,11 +46,29 @@ DevicesView = React.createClass
 
 DeviceListItem = React.createClass
 
+    componentDidMount: ->
+        measurements$ = DashboardDispatcher.findDeviceMeasurements @props.item._id
+        measurements$.onValue (measurements) => @loadedMeasurements measurements
+
+    loadedMeasurements: (d_ms) ->
+        d_ms.map (d_m) ->
+            d_m.t = new Date d_m.created_at
+
+        graph = @refs.graph
+        graph.setupGraph()
+        graph.setupAxes d_ms, d_ms
+        console.log @props.item
+        d = @props.item
+        graph.renderLine options: d, values: d_ms
+
     render: ->
-        <Link to="device" params={{device_id:@props.item._id}} className='block-button'>
+        d = @props.item
+
+        <Link to="device" params={{device_id: d._id}} className='block-button'>
             <div className='device item'>
-                <div className='kind'>{@props.item.kind}</div>
-                <div className='device_id'>{@props.item.device_id}</div>
+                <div className='kind'>{d.kind}</div>
+                <div className='device_id'>{d.device_id}</div>
+                <Graph ref={'graph'} />
             </div>
         </Link>
 
@@ -45,13 +84,34 @@ DeviceView = React.createClass
 
         if @state.loading
             return <em>Loading..</em>
+
+        # tabs
+        active_tab = @getPath().split('/').slice(-1)[0]
+        if active_tab == 'triggers'
+            triggers_active = 'active'
+        else
+            data_active = 'active'
+
         <div>
-            <h2>{'Device ' + device_id}</h2>
+            <h1><Link className='back' to="devices"><i className='fa fa-chevron-left' /></Link>{'Device ' + device_id}</h1>
             <ul className="tabs">
-                <li><Link to="device_data" params={device_id: device_id}>Data</Link></li>
-                <li><Link to="device_hooks" params={device_id: device_id}>Hooks</Link></li>
+                <li className={data_active}><Link to="device_data" params={device_id: device_id}>Data</Link></li>
+                <li className={triggers_active}><Link to="device_triggers" params={device_id: device_id}>Triggers</Link></li>
             </ul>
+            <p className='help'>Here are some details about the device</p>
             <RouteHandler device_id=device_id />
+        </div>
+
+# Device details
+AddDeviceView = React.createClass
+    mixins: [Router.State]
+
+    render: ->
+
+        <div className='add-device'>
+            <p className='help'>Add a new device!</p>
+            <div className='how-to'>Plug a battery into your device and connect to the wifi network called: "Maia Setup 0x..."</div>
+            <div className='how-to'>Once connected, open the device registration page at <a href='http://10.10.10.1/register'>http://10.10.10.1/register</a> to contine</div>
         </div>
 
 # Graph/visualization of device data
@@ -62,17 +122,19 @@ DeviceDataView = React.createClass
             This is a graph of the device
         </div>
 
-# Hoooks associated with the device
-DeviceHooksView = React.createClass
+# Triggers associated with the device
+DeviceTriggersView = React.createClass
 
     render: ->
-        <div className='device-hooks card'>
-            This is a page to set up hooks for this device
+        <div className='device-triggers card'>
+            This is a page to set up triggers for this device
         </div>
 
 module.exports = {
     DevicesView
+    DevicesListView
     DeviceView
+    AddDeviceView
     DeviceDataView
-    DeviceHooksView
+    DeviceTriggersView
 }
