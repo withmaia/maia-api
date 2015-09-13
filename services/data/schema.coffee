@@ -19,6 +19,9 @@ class Devices extends orm.Collection
 class Measurements extends orm.Collection
     @singular: 'measurement'
     @collection: 'measurements'
+    @coerce: (item) ->
+        item.created_at = item.createdAt()
+        item
 
 module.exports = {
     Users
