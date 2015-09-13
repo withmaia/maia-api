@@ -14,6 +14,9 @@ DashboardDispatcher =
     findDevices: ->
         fetch$ '/devices.json'
 
+    findDeviceMeasurements: (device_id) ->
+        fetch$("/devices/#{device_id}/measurements.json")
+
 module.exports = {
     DashboardDispatcher
 }
