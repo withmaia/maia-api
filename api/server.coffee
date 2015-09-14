@@ -116,8 +116,10 @@ app.get '/projects.json', (req, res) ->
         # res.json projects
         # project =
         #     kind: 'device/script'
-        #     device:
-        #     script:
+        #     name: ''
+        #     description: ''
+        #     image: ''
+        #     tutorial_id:
 
 app.get '/devices/:device_id/scripts/:script_slug.json', (req, res) ->
     # run script w/ {device_id, script_slug}
