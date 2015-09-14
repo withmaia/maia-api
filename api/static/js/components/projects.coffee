@@ -17,7 +17,7 @@ ProjectsView = React.createClass
     render: ->
         <div className='projects-list'>
             <h1>Shared Projects</h1>
-            <p className='help'>Here are the projects people have shared. Select a project to see a tutorial and parts list then build it and add it to Maia!</p>
+            <p className='help'>Select a project to see a tutorial and parts list. Order the parts, build it, then connect it to Maia!</p>
             {@state.items.map (d) ->
                 <ProjectListItem item=d />
             }
