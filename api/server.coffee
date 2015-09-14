@@ -32,7 +32,7 @@ user_middleware = (req, res, next) ->
     else
         next()
 
-app = polar _.extend {middleware: [user_middleware, users]}, config.api
+app = polar _.extend {middleware: [user_middleware, users]}, config.api, debug: true
 
 # "Hello, Maia"
 app.get '/', (req, res) ->
@@ -81,6 +81,47 @@ app.get '/devices/:device_id/measurements.json', (req, res) ->
 app.get '/cube.color', (req, res) ->
     BitcoinService 'getPriceColor', (err, color) ->
         res.end color
+
+# Scripts
+# ------------------------------------------------------------------------------
+
+app.get '/scripts.json', (req, res) ->
+    DataService 'findScripts', {}, (err, scripts) ->
+        res.json scripts
+
+# Projects
+# ------------------------------------------------------------------------------
+
+mock_projects = [
+    kind: 'device'
+    name: 'attinytemp'
+    description: 'wifi enabled temperature sensor'
+,
+    kind: 'script'
+    name: 'sunrise simulator'
+    description: 'wake up to a sunrise, no sun required'
+,
+    kind: 'device'
+    name: 'light cube'
+    description: 'internet connected ambient display'
+,
+    kind: 'device'
+    name: 'attinytoggle'
+    description: 'window and door opening sensor'
+]
+
+app.get '/projects.json', (req, res) ->
+    res.json mock_projects
+    # DataService 'findProjects', {}, (err, projects) ->
+        # res.json projects
+        # project =
+        #     kind: 'device/script'
+        #     device:
+        #     script:
+
+app.get '/devices/:device_id/scripts/:script_slug.json', (req, res) ->
+    # run script w/ {device_id, script_slug}
+    
 
 app.start()
 

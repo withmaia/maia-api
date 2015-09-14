@@ -14,6 +14,9 @@ DashboardDispatcher =
     findDevices: ->
         fetch$ '/devices.json'
 
+    findProjects: ->
+        fetch$ '/projects.json'
+
     findDeviceMeasurements: (device_id) ->
         fetch$("/devices/#{device_id}/measurements.json")
 

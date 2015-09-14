@@ -16,6 +16,8 @@ $colors
     purple: rgb(82, 94, 158)
     black: #333
     light_gray: #ddd
+    medium_gray: #aaa
+    on_green: #22F528
 
 $paddings
     small: 16px
@@ -45,8 +47,9 @@ a
 .card
     background: white
     width: 100%
+    max-width: 500px
     padding: $paddings.medium
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1)
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1), 0px 2px 8px rgba(0, 0, 0, 0.05)
     display: block
     margin: $paddings.small 0px
 
@@ -77,7 +80,8 @@ a
 h1
     font: $fonts.medium
     font-weight: 200
-    margin-bottom: $paddings.small
+    margin-bottom: $paddings.medium-large
+    color: $colors.purple
 
 .back
     color: #333
@@ -88,7 +92,7 @@ h1
 
 .help
     font: $fonts.default
-    font-weight: 200
+    font-weight: 400
     color: #888
     max-width: 600px
     padding-bottom: $paddings.small
@@ -121,12 +125,37 @@ h1
             display: inline-block
             margin-right: $paddings.small
 
+        .fa-circle
+            color: $colors.on_green
+            position: relative
+            top: -2px
+            font-size: 7px
+            margin: 0px 6px
+
         .kind
             color: $colors.black
+            font-weight: 600
 
         .device_id, .fa-gear
             float: right
             color: $colors.light_gray
+
+.projects-list
+    max-width: 500px
+
+    .project.item
+
+        .kind
+            margin-right: 10px
+            font-size: 12px
+
+        .name
+            font-weight: 600
+            display: inline
+
+        .description
+            display: inline
+            color: $colors.medium_gray
 
 .add-device
     a

@@ -56,6 +56,7 @@ DeviceListItem = React.createClass
 
         <Link to="device" params={{device_id: d._id}} className='block-button'>
             <div className='device item'>
+                <i className='fa fa-circle' />
                 <div className='kind'>{d.kind}</div>
                 <i className='fa fa-gear' />
                 <div className='device_id'>{d.device_id}</div>
