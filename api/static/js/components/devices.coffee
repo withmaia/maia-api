@@ -11,19 +11,7 @@ DevicesView = React.createClass
     mixins: [Router.State]
 
     render: ->
-        # tabs
-        active_tab = @getPath().split('/').slice(-1)[0]
-        if active_tab == 'add'
-            add_active = 'active'
-        else
-            my_active = 'active'
-
         <div className='devices-list'>
-            <h1>Devices</h1>
-            <ul className="tabs">
-                <li className={my_active}><Link to="devices" >My</Link></li>
-                <li className={add_active}><Link to="add_device" >Add</Link></li>
-            </ul>
             <RouteHandler />
         </div>
 
@@ -38,6 +26,8 @@ DevicesListView = React.createClass
 
     render: ->
         <div className='devices-list'>
+            <Link className='add-link' to='add_device'>Connect a new device</Link>
+            <h1>My Devices</h1>
             <p className='help'>Here are the devices you have connected with Maia. Select a device to view it's data or set up triggers.</p>
             {@state.items.map (d) ->
                 <DeviceListItem item=d />
@@ -67,6 +57,7 @@ DeviceListItem = React.createClass
         <Link to="device" params={{device_id: d._id}} className='block-button'>
             <div className='device item'>
                 <div className='kind'>{d.kind}</div>
+                <i className='fa fa-gear' />
                 <div className='device_id'>{d.device_id}</div>
                 <Graph ref={'graph'} />
             </div>
@@ -109,6 +100,7 @@ AddDeviceView = React.createClass
     render: ->
 
         <div className='add-device'>
+            <h1>Connect a Device</h1>
             <p className='help'>Add a new device!</p>
             <div className='how-to'>Plug a battery into your device and connect to the wifi network called: "Maia Setup 0x..."</div>
             <div className='how-to'>Once connected, open the device registration page at <a href='http://10.10.10.1/register'>http://10.10.10.1/register</a> to contine</div>

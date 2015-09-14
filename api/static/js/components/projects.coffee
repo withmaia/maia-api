@@ -5,7 +5,7 @@ Router = require 'react-router'
 
 {DashboardDispatcher} = require '../dispatcher'
 
-TriggersView = React.createClass
+ProjectsView = React.createClass
 
     getInitialState: ->
         items: []
@@ -15,22 +15,22 @@ TriggersView = React.createClass
 
     render: ->
         <div className='trigger-list'>
-            <h1>My Triggers</h1>
-            <p className='help'>Here are the triggers you have set up with Maia. A trigger runs a script under certain conditions.</p>
+            <h1>My Projects</h1>
+            <p className='help'>Here are the projects people have shared. Select a project to see a tutorial and parts list then build it and add it to Maia!</p>
             {@state.items.map (d) ->
-                <TriggerListItem item=d />
+                <ProjectListItem item=d />
             }
         </div>
 
 # TODO: use axis-like admin item and items views
-TriggerListItem = React.createClass
+ProjectListItem = React.createClass
 
     render: ->
-        <div className='trigger item'>
+        <div className='project item'>
             <div className='kind'>{@props.item.kind}</div>
             <div className='name'>{@props.item.name}</div>
         </div>
 
 module.exports = {
-    TriggersView
+    ProjectsView
 }

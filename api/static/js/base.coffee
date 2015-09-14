@@ -6,9 +6,8 @@ _ = require 'underscore'
 {AppView} = require './components/app'
 {LoginView} = require './components/login'
 {DevicesView, DeviceView, DeviceDataView, DeviceTriggersView, DevicesListView, AddDeviceView} = require './components/devices'
-{TriggersView} = require './components/triggers'
 {ScriptsView} = require './components/scripts'
-{TriggersView} = require './components/triggers'
+{ProjectsView} = require './components/projects'
 {Route, DefaultRoute} = Router
 
 # Routes
@@ -35,8 +34,8 @@ routes =
             <DefaultRoute name="device_data" handler={requireLogin DeviceDataView} />
             <Route name="device_triggers" path="triggers" handler={requireLogin DeviceTriggersView} />
         </Route>
-        <Route name="triggers" path="triggers" handler={requireLogin TriggersView} />
         <Route name="scripts" path="scripts" handler={requireLogin ScriptsView} />
+        <Route name="projects" path="projects" handler={requireLogin ProjectsView} />
     </Route>
 
 Router.run routes, (Handler) ->

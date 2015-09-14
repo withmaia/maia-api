@@ -14,6 +14,8 @@ $fonts
 
 $colors
     purple: rgb(82, 94, 158)
+    black: #333
+    light_gray: #ddd
 
 $paddings
     small: 16px
@@ -42,16 +44,22 @@ a
 
 .card
     background: white
+    width: 100%
     padding: $paddings.medium
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1)
     display: block
     margin: $paddings.small 0px
 
-.tabs
+.nav
     background: #EBEBEB
-    padding: 0px 36px
-    margin: 0px -36px
-    margin-bottom: $paddings.medium
+    padding: 0px $paddings.medium
+    padding-left: 82px
+
+    .logo
+        position: absolute
+        left: $paddings.medium
+        height: $paddings.medium-large
+        top: 8px
 
     li
         list-style: none
@@ -89,53 +97,36 @@ h1
     max-width: 400px
     margin-bottom: $paddings.small
 
-#nav
-    position: fixed
-    left: 0px
-    top: 0px
-    bottom: 0px
-    background: #333
-    display: block
-    color: white
-    padding: $paddings.small
-    padding-top: $paddings.medium
-
-    .logo
-        width: 49px
-        margin-right: $paddings.small
-
-    span
-        position: relative
-        top: -16px
-
-    a
-        color: white
-        font: $fonts.default
-        cursor: pointer
-        padding: $paddings.small
-        margin: 0px -$paddings.small
-        &:hover
-            color: #eee
-            background: #252525
-            text-shadow: 2px 0px 8px #000
-
 #content
     display: block
-    padding-left: 170px
-    padding-top: $paddings.medium
+    padding: $paddings.medium 0px
     background: #f2f2f2
     height: 100%
 
     h2
         margin-bottom: $paddings.small
 
-.device.item
-    
-    padding-bottom: $paddings.small
+.devices-list
+    max-width: 500px
 
-    div
-        display: inline-block
-        margin-right: $paddings.small
+    .add-link
+        float: right
+        padding-top: 8px
+
+    .device.item
+        
+        padding-bottom: $paddings.small
+
+        div
+            display: inline-block
+            margin-right: $paddings.small
+
+        .kind
+            color: $colors.black
+
+        .device_id, .fa-gear
+            float: right
+            color: $colors.light_gray
 
 .add-device
     a
