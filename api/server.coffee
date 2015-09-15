@@ -96,18 +96,22 @@ mock_projects = [
     kind: 'device'
     name: 'attinytemp'
     description: 'wifi enabled temperature sensor'
+    image: '/images/attinytemp1.jpg'
 ,
     kind: 'script'
     name: 'sunrise simulator'
     description: 'wake up to a sunrise, no sun required'
+    image: '/images/sunrise.jpg'
 ,
     kind: 'device'
     name: 'light cube'
     description: 'internet connected ambient display'
+    image: '/images/lightcube.jpg'
 ,
     kind: 'device'
     name: 'attinytoggle'
     description: 'window and door opening sensor'
+    image: '/images/door.jpg'
 ]
 
 app.get '/projects.json', (req, res) ->

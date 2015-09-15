@@ -31,7 +31,9 @@ ProjectListItem = React.createClass
             <div className='name'>{@props.item.name}</div>
             <div className='description'>{' - ' + @props.item.description}</div>
             <div className='card'>
-                <img className='main-image' src='/' />
+                <div className='masker'>
+                    <img className='main-image' src={@props.item.image} />
+                </div>
             </div>
         </div>
 
