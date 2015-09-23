@@ -16,16 +16,8 @@ BitcoinService = somata_client.bindRemote 'maia:bitcoin'
 
 user_middleware = (req, res, next) ->
 
-    # If the request has a token, find the relevant user
-    if token = req.headers.token
-        console.log 'has a token', token
-        id_query = jwt.decode token, config.auth.jwt.secret
-        console.log 'has a token', id_query
-        DataService 'getUser', id_query, (err, user) =>
-            res.locals.user = user
-            next()
     # If the request has a session user, find the relevant user
-    else if user_id = req.session?.user_id
+    if user_id = req.session?.user_id
         DataService 'getUser', {_id: user_id}, (err, user) =>
             res.locals.user = user
             next()
@@ -46,13 +38,12 @@ app.get '/dashboard', (req, res) ->
 
 # Post a new device with user credentials for validation
 app.post '/devices.json', (req, res) ->
-    {device_id, kind, email, password} = req.body
-    password = auth.hashPassword password
+    {device_id, kind, token} = req.body
     device = {device_id, kind}
-    user = {email, password}
-    EngineService 'validateNewDevice', user, device, (err, new_device) ->
+
+    EngineService 'validateNewDevice', device, token, (err, new_device) ->
         if err?
-            res.json success: false, error: err
+            res.send 401, error: err
         else
             announce 'maia:create-device', {device: new_device} if !config.LOCAL
             res.json success: true, new_device
@@ -61,6 +52,10 @@ app.post '/devices.json', (req, res) ->
 app.get '/devices.json', (req, res) ->
     DataService 'findDevices', {}, (err, devices) ->
         res.json devices
+
+app.get '/device_token.json', (req, res) ->
+    EngineService 'generateDeviceToken', res.locals.user, (err, token) ->
+        res.json token
 
 # Measurements
 # ------------------------------------------------------------------------------
