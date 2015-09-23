@@ -97,12 +97,29 @@ DeviceView = React.createClass
 AddDeviceView = React.createClass
     mixins: [Router.State]
 
+    getInitialState: ->
+        token: null
+
+    componentDidMount: ->
+        token$ = DashboardDispatcher.generateDeviceToken()
+        token$.onValue (items) => @setToken items
+
+    componentWillUnmount: ->
+        token$.offValue (items) => @setToken items
+
+    setToken: (token) ->
+        @setState {token}
+
     render: ->
 
         <div className='add-device'>
             <h1>Connect a Device</h1>
-            <p className='help'>Add a new device!</p>
-            <div className='how-to'>Plug a battery into your device and connect to the wifi network called: "Maia Setup 0x..."</div>
+            <p className='help'>Registration token:</p>
+            <div className='token'>{@state.token}</div>
+            <p className='help'>Instructions</p>
+            <div className='how-to'>Keep this, youll need it soon</div>
+            <div className='how-to'>Plug a battery into your device</div>
+            <div className='how-to'> and connect to the wifi network called: "Maia Setup 0x..."</div>
             <div className='how-to'>Once connected, open the device registration page at <a href='http://10.10.10.1/register'>http://10.10.10.1/register</a> to contine</div>
         </div>
 
