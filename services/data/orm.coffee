@@ -40,7 +40,7 @@ class Collection
         mongo.db.collection(@collection).remove(item, cb)
     @ensureIndex: (index, cb) ->
         mongo.db.collection(@collection).ensureIndex(index, cb)
-    @coerce: (item) -> item
+    @coerce: (item) -> new Document item
 
 class Document
     constructor: (attrs) ->

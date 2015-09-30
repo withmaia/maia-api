@@ -70,7 +70,7 @@ app.post '/measurements.json', (req, res) ->
 
 app.get '/devices/:device_id/measurements.json', (req, res) ->
     {device_id} = req.params
-    DataService 'findMeasurements', {device_id}, (err, measurements) ->
+    DataService 'findDeviceMeasurements', device_id, (err, measurements) ->
         res.json measurements
 
 app.get '/cube.color', (req, res) ->

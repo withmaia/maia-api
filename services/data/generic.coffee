@@ -27,9 +27,9 @@ module.exports = (schema) ->
                 cb err, got
 
         data_methods['find' + _Types] = (query, cb) ->
-            for qk, qv of query
-                if qk.match /_id$/
-                    qv = orm.oid qv
+            # for qk, qv of query
+            #     if qk.match /_id$/
+            #         qv = orm.oid qv
             console.log "[find#{ _Types }]", summarize query
             _type.findArray query, cb
 

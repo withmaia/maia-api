@@ -36,17 +36,22 @@ DevicesListView = React.createClass
 DeviceListItem = React.createClass
 
     componentDidMount: ->
-        measurements$ = DashboardDispatcher.findDeviceMeasurements @props.item._id
+        measurements$ = DashboardDispatcher.findDeviceMeasurements @props.item.device_id
         measurements$.onValue (measurements) => @loadedMeasurements measurements
 
     loadedMeasurements: (d_ms) ->
+
+        d_ms = d_ms.filter (d_m) ->
+            # Only show temperatures and filter out squirrely values for now
+            return (d_m.kind == 'temperature') && (d_m.value.indexOf(' ') < 0)
+
         d_ms.map (d_m) ->
             d_m.t = new Date d_m.created_at
 
         graph = @refs.graph
         graph.setupGraph()
         graph.setupAxes d_ms, d_ms
-        console.log @props.item
+        graph.drawAxes()
         d = @props.item
         graph.renderLine options: d, values: d_ms
 
