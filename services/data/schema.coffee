@@ -23,8 +23,13 @@ class Measurements extends orm.Collection
         item.created_at = item.createdAt()
         item
 
+class Subscriptions extends orm.Collection
+    @singular: 'subscription'
+    @collection: 'subscriptions'
+
 module.exports = {
     Users
     Devices
     Measurements
+    Subscriptions
 }

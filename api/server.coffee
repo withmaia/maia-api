@@ -123,6 +123,15 @@ app.get '/projects.json', (req, res) ->
 app.get '/devices/:device_id/scripts/:script_slug.json', (req, res) ->
     # run script w/ {device_id, script_slug}
     
+# Subscription route for teaser site
+app.post '/subscribe.json', (req, res) ->
+    {email} = req.body
+    ip = req.connection.remoteAddress
+    new_subscription = {email, ip, kind: 'mailing-list'}
+    announce 'maia:create-subscription', new_subscription if !config.LOCAL
+    DataService 'createSubscription', new_subscription, ->
+    res.setHeader 'Access-Control-Allow-Origin', '*'
+    res.json success: true
 
 app.start()
 
