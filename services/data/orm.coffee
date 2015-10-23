@@ -139,11 +139,12 @@ mongo_oid = (s) ->
 oid_to_timestamp = (id) ->
     parseInt(id.toString().substring(0, 8), 16) * 1000
 
-module.exports =
-    Collection: Collection
-    Document: Document
-    attach_child: attach_child
-    attach_attributes: attach_attributes
-    bulk_attach_attributes: bulk_attach_attributes
+module.exports = {
+    Collection
+    Document
+    attach_child
+    attach_attributes
+    bulk_attach_attributes
+    mongo
     oid: mongo_oid
-    mongo: mongo
+}

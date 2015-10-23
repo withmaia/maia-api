@@ -10,7 +10,7 @@ class Users extends orm.Collection
     @collection: 'users'
     @coerce: (item) ->
         delete item['password']
-        item = new Document item
+        item = new orm.Document item
         item
 
 class Devices extends orm.Collection
