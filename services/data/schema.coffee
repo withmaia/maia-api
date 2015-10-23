@@ -21,7 +21,7 @@ class Measurements extends orm.Collection
     @singular: 'measurement'
     @collection: 'measurements'
     @coerce: (item) ->
-        item = new Document item
+        item = new orm.Document item
         item.created_at = item.createdAt()
         item
 
