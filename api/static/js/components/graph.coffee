@@ -11,7 +11,7 @@ default_blue = '#39d'
 Graph = React.createClass
 
     setupGraph: ->
-        svg_el = @refs.main.getDOMNode()
+        svg_el = @refs.main
         @svg = d3.select(svg_el)
         @w = svg_el.offsetWidth
         @h = GRAPH_HEIGHT

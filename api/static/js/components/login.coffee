@@ -1,7 +1,5 @@
 React = require 'react'
-Router = require 'react-router'
-
-{Link} = Router
+{Router, Link, History} = require 'react-router'
 
 {ValidatedForm} = require 'react-zamba/lib/forms'
 
@@ -11,11 +9,11 @@ login_fields = [
 ]
 
 LoginView = React.createClass
-    mixins: [Router.Navigation]
+    mixins: [ History ]
 
     didLogin: ({success, user}) ->
         window.user = user
-        @transitionTo 'devices'
+        @history.pushState null, '/devices'
 
     render: ->
         <div>

@@ -1,18 +1,16 @@
 React = require 'react'
-Router = require 'react-router'
-
-{Link, RouteHandler} = Router
+{Router, Link, RouteHandler} = require 'react-router'
 
 {Graph} = require './graph'
 
 {DashboardDispatcher} = require '../dispatcher'
 
 DevicesView = React.createClass
-    mixins: [Router.State]
 
     render: ->
+
         <div className='devices-list'>
-            <RouteHandler />
+            {@props.children}
         </div>
 
 DevicesListView = React.createClass
@@ -25,8 +23,9 @@ DevicesListView = React.createClass
         devices$.onValue (items) => @setState {items}
 
     render: ->
+
         <div className='devices-list'>
-            <Link className='add-link' to='add_device'>Connect a new device</Link>
+            <Link className='add-link' to='/devices/add'>Connect a new device</Link>
             <h1>My Devices</h1>
             {@state.items.map (d) ->
                 <DeviceListItem item=d />
@@ -58,7 +57,7 @@ DeviceListItem = React.createClass
     render: ->
         d = @props.item
 
-        <Link to="device" params={{device_id: d._id}} className='block-button'>
+        <Link to="/devices/#{d._id}" className='block-button'>
             <div className='device item'>
                 <i className='fa fa-circle' />
                 <div className='kind'>{d.kind}</div>
@@ -70,19 +69,21 @@ DeviceListItem = React.createClass
 
 # Device details
 DeviceView = React.createClass
-    mixins: [Router.State]
+    contextTypes:
+        location: React.PropTypes.object
 
     getInitialState: ->
         loading: false
 
     render: ->
-        device_id = @getParams().device_id
+        device_id = @props.params.device_id
 
         if @state.loading
             return <em>Loading..</em>
 
         # tabs
-        active_tab = @getPath().split('/').slice(-1)[0]
+        active_tab = @context.location.pathname.split('/').slice(-1)[0]
+
         if active_tab == 'triggers'
             triggers_active = 'active'
         else
@@ -91,26 +92,25 @@ DeviceView = React.createClass
         <div>
             <h1><Link className='back' to="devices"><i className='fa fa-chevron-left' /></Link>{'Device ' + device_id}</h1>
             <ul className="tabs">
-                <li className={data_active}><Link to="device_data" params={device_id: device_id}>Data</Link></li>
-                <li className={triggers_active}><Link to="device_triggers" params={device_id: device_id}>Triggers</Link></li>
+                <li className={data_active}><Link to="/devices/#{device_id}" >Data</Link></li>
+                <li className={triggers_active}><Link to="/devices/#{device_id}/triggers" >Triggers</Link></li>
             </ul>
             <p className='help'>Here are some details about the device</p>
-            <RouteHandler device_id=device_id />
+            {@props.children}
         </div>
 
 # Device details
 AddDeviceView = React.createClass
-    mixins: [Router.State]
 
     getInitialState: ->
         token: null
 
     componentDidMount: ->
-        token$ = DashboardDispatcher.generateDeviceToken()
-        token$.onValue (items) => @setToken items
+        @token$ = DashboardDispatcher.generateDeviceToken()
+        @token$.onValue (items) => @setToken items
 
     componentWillUnmount: ->
-        token$.offValue (items) => @setToken items
+        @token$.offValue (items) => @setToken items
 
     setToken: (token) ->
         @setState {token}
