@@ -26,7 +26,7 @@ app.post '/signup.json', (req, res) ->
         email: req.body.email.toLowerCase().trim()
         password: auth.hashPassword req.body.password
 
-    DataService 'createUser', new_user, (err, created_user) ->
+    DataService 'signupUser', new_user, (err, created_user) ->
         if err
             log.w "[POST /signup] Failed signup: #{ new_user.email }", new_user: new_user
             res.json

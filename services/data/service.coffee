@@ -24,6 +24,16 @@ data_methods.loginUser = (email, password, cb) ->
         else
             cb "Incorrect email or password"
 
+data_methods.signupUser = (email, password, cb) ->
+    user_query =
+        email: {$regex: '^' + email.trim().toLowerCase() + '$', $options: 'i'}
+
+    data_methods.getUser user_query, (err, user) ->
+        if user?
+            cb {email: "A user already exists with that email"}
+        else
+            schema.Users.insert {email, password}, cb
+
 data_methods.findDeviceMeasurements = (device_id, cb) ->
 
     device_query =
