@@ -1,0 +1,29 @@
+doctype html5
+html(lang='en')
+    head
+        title Maia
+        meta(charset='utf-8')
+        meta(name='viewport', content='width=device-width, initial-scale=1.0')
+        meta(name='apple-mobile-web-app-capable', content='yes')
+        meta(name='author', content='http://github.com/withmaia')
+        link(href='//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css', rel='stylesheet')
+        link(href='http://fonts.googleapis.com/css?family=Roboto:400,600,300,700', rel='stylesheet', type='text/css')
+        link(href='/css/base.css', rel='stylesheet')
+        link(href='/css/home.css', rel='stylesheet')
+        link(href='/images/favicon.png', rel='shortcut icon')
+
+    body
+        #header
+            .links
+                a(href='/dashboard') Log in
+                a(href='https://github.com/withmaia') Github
+        #content
+            h1 This is the homepage
+
+            button Create an account
+        if user
+            script.
+                window.user = {
+                    _id: "#{ user._id }",
+                    email: "#{ user.email }",
+                }
