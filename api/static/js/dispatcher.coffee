@@ -1,28 +1,37 @@
 Kefir = require 'kefir'
-
-# Helpers
-# ------------------------------------------------------------------------------
-
-fetch$ = (url, options={}) ->
-    options.credentials = 'same-origin'
-    fetch_ = fetch(url, options).then (res) -> res.json()
-    Kefir.fromPromise fetch_
+fetch$ = require './fetch-stream'
+{ReloadableStream} = require './stream-helpers'
 
 # Dispatcher
 # ------------------------------------------------------------------------------
 
 DashboardDispatcher =
     findDevices: ->
-        fetch$ '/devices.json'
+        fetch$ 'get', '/devices.json'
 
     findProjects: ->
-        fetch$ '/projects.json'
+        fetch$ 'get', '/projects.json'
 
     findDeviceMeasurements: (device_id) ->
-        fetch$("/devices/#{device_id}/measurements.json")
+        fetch$('get', "/devices/#{device_id}/measurements.json")
 
     generateDeviceToken: ->
-        fetch$("/device_token.json")
+        fetch$('get', "/device_token.json")
+
+    findScripts: ->
+        fetch$ 'get', '/scripts.json'
+
+    createScript: (new_script) ->
+        fetch$('post', '/scripts.json', json: new_script).onValue ->
+            DashboardDispatcher.scripts$.reload()
+
+
+    deleteScript: (script_id) ->
+        fetch$('delete', "/scripts/#{script_id}.json").onValue ->
+            DashboardDispatcher.scripts$.reload()
+
+DashboardDispatcher.scripts$ = ReloadableStream DashboardDispatcher.findScripts
+DashboardDispatcher.scripts$.reload()
 
 module.exports = {
     DashboardDispatcher
