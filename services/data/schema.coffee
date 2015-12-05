@@ -29,9 +29,14 @@ class Subscriptions extends orm.Collection
     @singular: 'subscription'
     @collection: 'subscriptions'
 
+class Scripts extends orm.Collection
+    @singular: 'script'
+    @collection: 'scripts'
+
 module.exports = {
     Users
     Devices
     Measurements
     Subscriptions
+    Scripts
 }

@@ -81,6 +81,22 @@ app.get '/scripts.json', (req, res) ->
     DataService 'findScripts', {}, (err, scripts) ->
         res.json scripts
 
+app.post '/scripts.json', (req, res) ->
+    new_script = req.body
+    DataService 'createScript', new_script, (err, script) ->
+        res.json script
+
+app.put '/scripts/:script_id.json', (req, res) ->
+    {script_id} = req.params
+    script_update = req.body
+    DataService 'updateScript', script_id, script_update, (err, script) ->
+        res.json script
+
+app.delete '/scripts/:script_id.json', (req, res) ->
+    {script_id} = req.params
+    DataService 'removeScript', script_id, (err, scripts) ->
+        res.json scripts
+
 # Projects
 # ------------------------------------------------------------------------------
 
