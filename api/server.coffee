@@ -1,7 +1,6 @@
 polar = require 'polar'
 config = require '../config'
 somata = require 'somata'
-_ = require 'underscore'
 announce = require 'nexus-announce'
 
 auth = require './auth'
@@ -13,18 +12,16 @@ DataService = somata_client.bindRemote 'maia:data'
 EngineService = somata_client.bindRemote 'maia:engine'
 BitcoinService = somata_client.bindRemote 'maia:bitcoin'
 
-
 user_middleware = (req, res, next) ->
-
     # If the request has a session user, find the relevant user
-    if user_id = req.session?.user_id
+    if user_id = req.session.user_id
         DataService 'getUser', {_id: user_id}, (err, user) =>
             res.locals.user = user
             next()
     else
         next()
 
-app = polar _.extend {middleware: [user_middleware, users]}, config.api, debug: true
+app = polar config.api, middleware: [user_middleware, users], debug: true
 
 # "Hello, Maia"
 app.get '/', (req, res) ->
