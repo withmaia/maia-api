@@ -52,7 +52,7 @@ AppView = React.createClass
 
         <div>
             <ul className="nav">
-                <a href='/dashboard'><img className='logo' src='/images/logo-lg.png' /></a>
+                <li className='logo'><a href='/dashboard'><img src='/images/logo-lg.png' /></a></li>
                 <li className={devices_active} ><Link to="/devices" >Devices</Link></li>
                 <li className={scripts_active} ><Link to="/scripts" >Scripts</Link></li>
                 <li className={projects_active} ><Link to="/projects" >Projects</Link></li>

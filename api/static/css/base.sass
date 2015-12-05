@@ -16,13 +16,14 @@ $colors
     purple: rgb(82, 94, 158)
     black: #333
     light_gray: #ddd
+    lightest_gray: #f2f2f2
     medium_gray: #aaa
     on_green: #22F528
 
 $paddings
     small: 16px
     medium: 25px
-    medium-large: 36px
+    medium_large: 36px
 
 *
     margin: 0
@@ -30,7 +31,8 @@ $paddings
     box-sizing: border-box
 
 body
-    font: $font
+    font: 15px $font
+    background: $colors.lightest_gray
 
 img
     max-width: 100%
@@ -55,24 +57,28 @@ a
     margin: $paddings.small 0px
 
 .nav
-    background: #EBEBEB
     padding: 0px $paddings.medium
-    padding-left: 82px
 
     .logo
-        position: absolute
-        left: $paddings.medium
-        height: $paddings.medium-large
-        top: 8px
+        border: 0
+        margin-right: $paddings.medium
+
+        a
+            padding: 0
+
+        img
+            height: 32px
 
     li
+        vertical-align: middle
         list-style: none
         display: inline-block
         border-bottom: 3px solid rgba(0, 0, 0, 0)
+        margin-right: $paddings.small
 
         a
-            padding: 20px $paddings.medium 10px 10px
-            margin-right: $paddings.small
+            display: block
+            padding: $paddings.small
             cursor: pointer
 
         &.active
@@ -81,7 +87,7 @@ a
 h1
     font: $fonts.medium
     font-weight: 200
-    margin-bottom: $paddings.medium-large
+    margin-bottom: $paddings.medium_large
     color: $colors.purple
 
 .back
@@ -105,7 +111,6 @@ h1
 #content
     display: block
     padding: $paddings.medium 0px
-    background: #f2f2f2
     height: 100%
 
     h2
@@ -146,7 +151,7 @@ h1
 
     .project.item
         cursor: pointer
-        margin-bottom: $paddings.medium-large
+        margin-bottom: $paddings.medium_large
 
         .kind
             margin-right: 10px
