@@ -19,8 +19,12 @@ requireLogin = (nextState, replaceState) ->
     console.log 'requireing login'
     next_path = nextState.location.pathname
 
-    if (not user? && next_path!='/login')
+    if (not user? && next_path!='/login' && next_path!='/signup')
         replaceState nextPathname: next_path, '/login'
+
+    else if next_path == '/'
+        replaceState nextPathname: next_path, '/devices'
+    
 
 # Routes
 # ------------------------------------------------------------------------------

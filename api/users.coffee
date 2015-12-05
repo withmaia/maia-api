@@ -84,10 +84,9 @@ app.post '/login.json', (req, res) ->
         else
             success response
 
-app.post '/logout.json', (req, res) ->
+app.get '/logout', (req, res) ->
     req.session.destroy ->
-        res.json
-            success: true
+        res.redirect '/'
 
 app.post '/users/:user_id/token.json', auth.isThisUser, (req, res) ->
     user_id = req.params.user_id

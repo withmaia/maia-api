@@ -19,14 +19,13 @@ LoginView = React.createClass
         <div>
             <div className='center'>
                 <div className='logo'><img src='/images/logo.png' /></div>
-                <h1>Maia</h1>
-                <h2>Please log in</h2>
             </div>
 
             <div className='login-view'>
-                <ValidatedForm action='/login.json' fields=login_fields focus=true onSuccess=@didLogin />
+                <div className='instructions'>Log into your Maia account</div>
+                <ValidatedForm action='/login.json' fields=login_fields focus=true onSuccess=@didLogin button={className:'touch-button', text: 'Log in', loading_text: 'Logging in...'} />
+                <Link to='/signup'>Don't have an account?</Link>
             </div>
-            <Link to='/signup'>Don't have an account?</Link>
         </div>
 
 module.exports = {LoginView}

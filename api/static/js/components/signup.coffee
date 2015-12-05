@@ -19,14 +19,13 @@ SignupView = React.createClass
         <div>
             <div className='center'>
                 <div className='logo'><img src='/images/logo.png' /></div>
-                <h1>Maia</h1>
-                <h2>Create a Maia account</h2>
             </div>
 
-            <div className='login-view'>
-                <ValidatedForm action='/signup.json' fields=signup_fields focus=true onSuccess=@didSignup />
+            <div className='signup-view'>
+                <div className='instructions'>Create a new Maia account</div>
+                <ValidatedForm action='/signup.json' fields=signup_fields focus=true onSuccess=@didSignup button={className:'touch-button', text: 'Register', loading_text: 'Registering...'} />
+                <Link to='/login'>Already have an account?</Link>
             </div>
-            <Link to='/login'>Already have an account?</Link>
         </div>
 
 module.exports = {SignupView}
