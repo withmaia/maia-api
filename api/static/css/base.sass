@@ -42,6 +42,17 @@ a
     display: block
     color: $colors.purple
 
+input, textarea
+    display: block
+    border: none
+    padding: $paddings.small
+    text-align: left
+    background: #eaeaea
+
+    margin-top: $paddings.small
+    width: 100%
+    max-width: 400px
+
 .container
     position: relative
     padding: 0px $paddings.medium
@@ -207,27 +218,26 @@ h1
     border-radius: 3px
     margin: $paddings.small 0px
     width: 100%
+    max-width: 400px
     cursor: pointer
 
 .signup-view, .login-view
 
     max-width: 400px
-    margin: 0px auto
+    margin: 200px auto
+
+    font: $fonts.default
 
     .instructions
         color: $colors.purple
         text-align: center
+        font-weight: bold
 
     label
         display: none
 
     input
-        border: none
         width: 100%
-        padding: $paddings.small
         text-align: center
-        background: #eaeaea
-
-        margin-top: $paddings.small
 
 @import 'graph.sass'

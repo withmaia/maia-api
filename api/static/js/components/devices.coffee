@@ -119,8 +119,8 @@ AddDeviceView = React.createClass
 
         <div className='add-device'>
             <h1>Connect a Device</h1>
-            <p className='help'>Registration token:</p>
-            <div className='token'>{@state.token}</div>
+            <p className='help'>Registration token</p>
+            <code className='token'>{@state.token}</code>
             <p className='help'>Instructions</p>
             <div className='how-to'>Keep this, youll need it soon</div>
             <div className='how-to'>Plug a battery into your device</div>

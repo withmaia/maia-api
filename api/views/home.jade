@@ -15,13 +15,13 @@ html(lang='en')
     body
         #header
             .links
-                a(href='/dashboard#/signup') Log in
+                a(href='/dashboard#/login') Log in
                 a(href='https://github.com/withmaia') Github
         #content
             h1 This is the homepage
 
             .buttons
-                a.touch-button(href='/dashboard') Create an account
+                a.touch-button(href='/dashboard#/signup') Create an account
         if user
             script.
                 window.user = {
