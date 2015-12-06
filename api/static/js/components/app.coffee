@@ -38,7 +38,7 @@ AppView = React.createClass
     render: ->
         route = @props.routes.slice(-1)[0]
         handler = route.handler
-        backButton = <a onClick=@goBack className="back"><Icon icon='chevron-left' /></a>
+        backButton = <a onClick=@goBack className="back"><Icon icon='arrow-left' /></a>
 
         console.log 'the route is', route
 

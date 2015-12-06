@@ -90,13 +90,13 @@ DeviceView = React.createClass
             data_active = 'active'
 
         <div>
-            <h1><Link className='back' to="devices"><i className='fa fa-chevron-left' /></Link>{'Device ' + device_id}</h1>
+            <h1><Link className='back' to="devices"><i className='fa fa-arrow-left' /></Link>{'Device ' + device_id}</h1>
+            {@props.children}
+            <p className='help'>Here are some details about the device</p>
             <ul className="tabs">
                 <li className={data_active}><Link to="/devices/#{device_id}" >Data</Link></li>
                 <li className={triggers_active}><Link to="/devices/#{device_id}/triggers" >Triggers</Link></li>
             </ul>
-            <p className='help'>Here are some details about the device</p>
-            {@props.children}
         </div>
 
 # Device details
@@ -117,14 +117,13 @@ AddDeviceView = React.createClass
 
     render: ->
 
+            # <p className='help'>Instructions</p>
         <div className='add-device'>
-            <h1>Connect a Device</h1>
-            <p className='help'>Registration token</p>
+            <h1><Link className='back' to="devices"><i className='fa fa-arrow-left' /></Link>Connect a New Device</h1>
+            <p className='help'>New device token</p>
             <code className='token'>{@state.token}</code>
-            <p className='help'>Instructions</p>
             <div className='how-to'>Keep this, youll need it soon</div>
-            <div className='how-to'>Plug a battery into your device</div>
-            <div className='how-to'> and connect to the wifi network called: "Maia Setup 0x..."</div>
+            <div className='how-to'>Plug a battery into your device and connect your computer or mobile device to the wifi network called: "Maia Setup 0x..."</div>
             <div className='how-to'>Once connected, open the device registration page at <a href='http://10.10.10.1/register'>http://10.10.10.1/register</a> to contine</div>
         </div>
 
