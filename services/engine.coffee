@@ -1,13 +1,12 @@
-_ = require 'underscore'
 somata = require 'somata'
-
-Redis = require 'redis'
-redis = Redis.createClient null, null
-
+redis = require('redis').createClient null, null
 auth = require '../api/auth'
 
 somata_client = new somata.Client
 DataService = somata_client.bindRemote 'maia:data'
+
+# Device registration
+# ------------------------------------------------------------------------------
 
 validateNewDevice = (new_device, token, cb) ->
 
@@ -30,9 +29,10 @@ generateDeviceToken = (user, cb) ->
         token: token
 
     redis.hmset token, verification
-    redis.expire token, 10*60 #good for 10 mins
+    redis.expire token, 10*60 # Good for 10 min
 
     cb null, token
+
 
 data_service = new somata.Service 'maia:engine', {
     validateNewDevice
