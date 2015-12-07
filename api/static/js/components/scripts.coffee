@@ -76,7 +76,7 @@ ScriptListItem = React.createClass
             </div>
             <span className='name'>{@props.item.name}</span>
             <span className='trigger'>{@props.item.trigger}</span>
-            <pre>{@props.item.source}</pre>
+            <pre className='source'>{@props.item.source}</pre>
         </div>
 
 module.exports = {
