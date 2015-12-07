@@ -56,7 +56,7 @@ NewScript = React.createClass
     render: ->
         <div>
             <form onSubmit=@onSubmit>
-                <p className='help'>Create a new script</p>
+                <h2>Create a new script</h2>
                 <input value=@state.name onChange=@onChange('name') placeholder='name' className=@errorClass('name') />
                 <input value=@state.trigger onChange=@onChange('trigger') placeholder='trigger' className=@errorClass('trigger') />
                 <textarea value=@state.source onChange=@onChange('source') className=@errorClass('source') placeholder='source' />

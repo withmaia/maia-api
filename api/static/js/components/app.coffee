@@ -60,7 +60,7 @@ AppView = React.createClass
         <div>
             {if show_menu
                 <ul className="nav">
-                    <li className='logo'><a href='/dashboard'><img src='/images/logo-lg.png' /></a></li>
+                    <li className='home'><a href='/dashboard'><img className='logo' src='/images/logo.svg' /></a></li>
                     <li className={devices_active} ><Link to="/devices" >Devices</Link></li>
                     <li className={scripts_active} ><Link to="/scripts" >Scripts</Link></li>
                     <li className={projects_active} ><Link to="/projects" >Projects</Link></li>

@@ -16,13 +16,10 @@ SignupView = React.createClass
         @history.pushState null, '/devices'
 
     render: ->
-        <div>
-            <div className='center'>
-                <div className='logo'><img src='/images/logo.png' /></div>
-            </div>
-
+        <div className='center-center'>
             <div className='signup-view'>
-                <div className='instructions'>Create a new Maia account</div>
+                <img className='logo' src='/images/logo.svg' />
+                <h2>Create a new Maia account</h2>
                 <ValidatedForm action='/signup.json' fields=signup_fields focus=true onSuccess=@didSignup button={className:'touch-button', text: 'Register', loading_text: 'Registering...'} />
                 <Link to='/login'>Already have an account?</Link>
             </div>

@@ -16,13 +16,10 @@ LoginView = React.createClass
         @history.pushState null, '/devices'
 
     render: ->
-        <div>
-            <div className='center'>
-                <div className='logo'><img src='/images/logo.png' /></div>
-            </div>
-
+        <div className='center-center'>
             <div className='login-view'>
-                <div className='instructions'>Log into your Maia account</div>
+                <img className='logo large' src='/images/logo.svg' />
+                <h2>Log into your Maia account</h2>
                 <ValidatedForm action='/login.json' fields=login_fields focus=true onSuccess=@didLogin button={className:'touch-button', text: 'Log in', loading_text: 'Logging in...'} />
                 <Link to='/signup'>Don't have an account?</Link>
             </div>

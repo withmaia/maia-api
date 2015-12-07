@@ -1,5 +1,6 @@
 $globals
     font: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif
+    padding: 15px
 
 $fonts
     default: 16px $font
@@ -20,11 +21,6 @@ $colors
     medium_gray: #aaa
     on_green: #22F528
 
-$paddings
-    small: 16px
-    medium: 25px
-    medium_large: 36px
-
 *
     margin: 0
     padding: 0
@@ -37,62 +33,85 @@ body
 img
     max-width: 100%
 
+    &.logo
+        max-width: 200px
+
 a
     text-decoration: none
     display: block
     color: $colors.purple
 
+h1, h2, h3
+    color: $colors.purple
+    font-weight: 300
+
+h2
+    margin-top: calc($padding * 2)
+
 input, textarea
     display: block
     border: none
-    padding: $paddings.small
+    padding: $padding
     text-align: left
     background: #eaeaea
-
-    margin-top: $paddings.small
+    margin-top: $padding
     width: 100%
-    max-width: 400px
+
+input, textarea, button, select
+    font: inherit
+
+textarea
+    min-height: 100px
 
 .container
-    position: relative
-    padding: 0px $paddings.medium
+    padding: calc($padding * 2)
 
 .card
     background: white
     width: 100%
-    max-width: 500px
-    padding: $paddings.medium
+    padding: calc($padding * 2)
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1), 0px 2px 8px rgba(0, 0, 0, 0.05)
     display: block
-    margin: $paddings.small 0px
+    margin: $padding 0px
 
 .center
     text-align: center
 
+.center-center
+    position: absolute
+    top: 0
+    bottom: 0
+    left: 0
+    right: 0
+    text-align: center
+    display: flex
+    justify-content: center
+    align-items: center
+
 .nav
-    padding: 0px $paddings.medium
+    padding: 0px calc($padding * 2)
 
     .logo
-        border: 0
-        margin-right: $paddings.medium
-
-        a
-            padding: 0
-
-        img
-            height: 32px
+        height: 32px
 
     li
         vertical-align: middle
         list-style: none
         display: inline-block
         border-bottom: 3px solid rgba(0, 0, 0, 0)
-        margin-right: $paddings.small
+        margin-right: $padding
 
         a
             display: block
-            padding: $paddings.small
+            padding: $padding
             cursor: pointer
+
+        &:first-child
+            border: 0
+            margin-right: $padding
+
+            a
+                padding: 0
 
         &.active
             border-color: $colors.purple
@@ -100,50 +119,39 @@ input, textarea
 h1
     font: $fonts.medium
     font-weight: 400
-    margin-bottom: $paddings.medium_large
+    margin-bottom: $padding
     color: $colors.purple
 
 .back
     display: inline-block
     color: $colors.purple
     font-size: 16px
-    padding-right: $paddings.small
+    padding-right: $padding
     position: relative
     top: -4px
 
 .help
-    font: $fonts.default
-    font-weight: 400
     color: #888
-    max-width: 600px
-    padding-bottom: $paddings.small
+    margin: 0 0 calc($padding * 2)
 
 .how-to
-    max-width: 400px
-    margin: $paddings.small 0px
+    margin: $padding 0px
 
 #content
     display: block
-    padding: $paddings.medium 0px
-    height: 100%
-
-    h2
-        margin-bottom: $paddings.small
 
 .devices-list
-    max-width: 500px
 
     .add-link
         float: right
         padding-top: 8px
 
     .device.item
-        
-        padding-bottom: $paddings.small
+        padding-bottom: $padding
 
         div
             display: inline-block
-            margin-right: $paddings.small
+            margin-right: $padding
 
         .fa-circle
             color: $colors.on_green
@@ -161,11 +169,10 @@ h1
             color: $colors.light_gray
 
 .projects-list
-    max-width: 500px
 
     .project.item
         cursor: pointer
-        margin-bottom: $paddings.medium_large
+        margin-bottom: $padding
 
         .kind
             margin-right: 10px
@@ -188,6 +195,7 @@ h1
                 top: -60px
 
 .add-device
+
     a
         display: inline-block
 
@@ -225,22 +233,18 @@ h1
     padding: 16px
     border: none
     border-radius: 3px
-    margin: $paddings.small 0px
+    margin: $padding 0px
     width: 100%
-    max-width: 400px
     cursor: pointer
 
 .signup-view, .login-view
-
-    max-width: 400px
-    margin: 200px auto
-
     font: $fonts.default
 
-    .instructions
+    h2
         color: $colors.purple
-        text-align: center
-        font-weight: bold
+
+    .logo + h2
+        margin-top: calc($padding * 2)
 
     label
         display: none
@@ -250,3 +254,4 @@ h1
         text-align: center
 
 @import 'graph.sass'
+

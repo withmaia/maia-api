@@ -14,14 +14,17 @@ html(lang='en')
 
     body
         #header
-            .links
-                a(href='/dashboard#/login') Log in
-                a(href='https://github.com/withmaia') Github
-        #content
-            h1 This is the homepage
+            ul.nav
+                li: a(href='/dashboard#/login') Log in
+                li: a(href='https://github.com/withmaia') Github
 
-            .buttons
-                a.touch-button(href='/dashboard#/signup') Create an account
+        .center-center
+            .home-page
+                h1 This is the homepage
+
+                .buttons
+                    a.touch-button(href='/dashboard#/signup') Create an account
+
         if user
             script.
                 window.user = {
