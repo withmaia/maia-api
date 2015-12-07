@@ -66,13 +66,21 @@ NewScript = React.createClass
 
 # TODO: use axis-like admin item and items views
 ScriptListItem = React.createClass
+
     delete: ->
         DashboardDispatcher.deleteScript @props.item._id
+
+    toggleDisabled: ->
+        if @props.item.disabled
+            DashboardDispatcher.updateScript @props.item._id, {disabled: false}
+        else
+            DashboardDispatcher.updateScript @props.item._id, {disabled: true}
 
     render: ->
         <div className='script item'>
             <div className='actions'>
                 <a onClick=@delete>Delete</a>
+                <a onClick=@toggleDisabled>{if @props.item.disabled then "Enable" else "Disable"}</a>
             </div>
             <span className='name'>{@props.item.name}</span>
             <span className='trigger'>{@props.item.trigger}</span>

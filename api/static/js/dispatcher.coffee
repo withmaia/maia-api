@@ -25,9 +25,12 @@ DashboardDispatcher =
         fetch$('post', '/scripts.json', json: new_script).onValue ->
             DashboardDispatcher.scripts$.reload()
 
-
     deleteScript: (script_id) ->
         fetch$('delete', "/scripts/#{script_id}.json").onValue ->
+            DashboardDispatcher.scripts$.reload()
+
+    updateScript: (script_id, script_update) ->
+        fetch$('put', "/scripts/#{script_id}.json", json: script_update).onValue ->
             DashboardDispatcher.scripts$.reload()
 
 DashboardDispatcher.scripts$ = ReloadableStream DashboardDispatcher.findScripts
