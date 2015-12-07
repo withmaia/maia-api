@@ -7,7 +7,7 @@ orm = require './orm'
 # General
 # ------------------------------------------------------------------------------
 
-module.exports = (schema) ->
+module.exports = (schema, service) ->
     data_methods = {}
 
     # Get, Create, Update, and Remove methods for each type in the schema
@@ -37,10 +37,11 @@ module.exports = (schema) ->
             _type.findArray query, {sort: {_id: 1}}, cb
 
         data_methods['create' + _Type] = (item, cb) ->
-            _type.insert item, (err, inserted) ->
+            _type.insert item, (err, [created]) ->
                 console.log 'error', err if err?
-                console.log "[create#{ _Type }]", summarize inserted
-                cb err, inserted[0]
+                console.log "[create#{ _Type }]", summarize created
+                service.publish 'create' + _Type, created
+                cb err, created
 
         data_methods['update' + _Type] = (item_id, item, cb) ->
             delete item['_id']
@@ -48,7 +49,9 @@ module.exports = (schema) ->
                 {$set: item}, {new: true}, cb
 
         data_methods['remove' + _Type] = (item_id, cb) ->
-            _type.remove {_id: orm.oid item_id}, cb
+            _type.remove {_id: orm.oid item_id}, (err) ->
+                service.publish 'remove' + _Type, {_id: item_id}
+                cb err, null
             
     return data_methods
 

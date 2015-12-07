@@ -3,7 +3,9 @@ generic = require './generic'
 schema = require './schema'
 orm = require './orm'
 
-data_methods = generic(schema)
+data_service = new somata.Service 'maia:data'
+
+data_methods = generic(schema, data_service)
 
 hrs_ago_id_from_hours = (hrs_ago) ->
     now  = new Date()
@@ -47,4 +49,4 @@ data_methods.findDeviceMeasurements = (device_id, cb) ->
 
         cb err, measurements
 
-data_service = new somata.Service 'maia:data', data_methods
+data_service.methods = data_methods
