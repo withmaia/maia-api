@@ -1,24 +1,25 @@
 somata = require 'somata'
 coffee = require 'coffee-script'
-util = require 'util'
 
 client = new somata.Client
 
-runScript = (trigger, source) ->
-    compiled = coffee.compile source, bare: true
-    console.log 'compiled: ', compiled
-    fn = eval compiled
+watchScript = ({trigger, id}) ->
     [service, method] = trigger.split('.')
-    console.log [service, method]
-    client.on service, method, fn
+    client.on service, method, runScript(id)
 
-trigger = 'maia:hue.changeState'
-source = '''
-({id, state}) ->
-    console.log "Light #" + id + " turned " + (if state.on then "on" else "off")
-    if id == 1
-        client.remote 'maia:hue', 'setState', 4, state
-'''
+unwatchScript = ({id}) ->
+    console.log 'TODO: Unsubscribe event handler'
 
-runScript trigger, source
+runScript = (id) -> (data) ->
+    client.call 'maia:data', 'getScript', {id}, (err, script) ->
+        compiled = coffee.compile script.source, bare: true
+        fn = eval compiled
+        fn(data)
 
+# Get existing scripts on startup
+client.call 'maia:data', 'findScripts', {}, (err, all_scripts) ->
+    all_scripts.map watchScript
+
+# Listen for created and removed scripts
+client.on 'maia:data', 'addScript', watchScript
+client.on 'maia:data', 'removeScript', unwatchScript
