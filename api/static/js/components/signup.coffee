@@ -3,15 +3,15 @@ React = require 'react'
 
 {ValidatedForm} = require 'react-zamba/lib/forms'
 
-login_fields = [
+signup_fields = [
     {name: 'email', type: 'email'}
     {name: 'password', type: 'password'}
 ]
 
-LoginView = React.createClass
+SignupView = React.createClass
     mixins: [ History ]
 
-    didLogin: ({success, user}) ->
+    didSignup: ({success, user}) ->
         window.user = user
         @history.pushState null, '/devices'
 
@@ -21,11 +21,11 @@ LoginView = React.createClass
                 <div className='logo'><img src='/images/logo.png' /></div>
             </div>
 
-            <div className='login-view'>
-                <div className='instructions'>Log into your Maia account</div>
-                <ValidatedForm action='/login.json' fields=login_fields focus=true onSuccess=@didLogin button={className:'touch-button', text: 'Log in', loading_text: 'Logging in...'} />
-                <Link to='/signup'>Don't have an account?</Link>
+            <div className='signup-view'>
+                <div className='instructions'>Create a new Maia account</div>
+                <ValidatedForm action='/signup.json' fields=signup_fields focus=true onSuccess=@didSignup button={className:'touch-button', text: 'Register', loading_text: 'Registering...'} />
+                <Link to='/login'>Already have an account?</Link>
             </div>
         </div>
 
-module.exports = {LoginView}
+module.exports = {SignupView}

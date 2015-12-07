@@ -25,7 +25,11 @@ app = polar config.api, middleware: [user_middleware, users], debug: true
 
 # "Hello, Maia"
 app.get '/', (req, res) ->
-    res.end 'Maia API v0.0.1'
+    # res.end 'Maia API v0.0.1'
+    if res.locals.user?
+        res.redirect '/dashboard'
+    else
+        res.render 'home'
 
 app.get '/dashboard', (req, res) ->
     res.render 'dashboard'

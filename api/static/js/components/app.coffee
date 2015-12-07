@@ -38,7 +38,9 @@ AppView = React.createClass
     render: ->
         route = @props.routes.slice(-1)[0]
         handler = route.handler
-        backButton = <a onClick=@goBack className="back"><Icon icon='chevron-left' /></a>
+        backButton = <a onClick=@goBack className="back"><Icon icon='arrow-left' /></a>
+
+        console.log 'the route is', route
 
         # tabs
         active_tab = @props.location.pathname.split('/')[1] || ''
@@ -50,13 +52,20 @@ AppView = React.createClass
         else if active_tab == 'projects'
             projects_active = 'active'
 
+        show_menu = true
+
+        if route.path in ['login', 'signup']
+            show_menu = false
+
         <div>
-            <ul className="nav">
-                <li className='logo'><a href='/dashboard'><img src='/images/logo-lg.png' /></a></li>
-                <li className={devices_active} ><Link to="/devices" >Devices</Link></li>
-                <li className={scripts_active} ><Link to="/scripts" >Scripts</Link></li>
-                <li className={projects_active} ><Link to="/projects" >Projects</Link></li>
-            </ul>
+            {if show_menu
+                <ul className="nav">
+                    <li className='logo'><a href='/dashboard'><img src='/images/logo-lg.png' /></a></li>
+                    <li className={devices_active} ><Link to="/devices" >Devices</Link></li>
+                    <li className={scripts_active} ><Link to="/scripts" >Scripts</Link></li>
+                    <li className={projects_active} ><Link to="/projects" >Projects</Link></li>
+                </ul>
+            }
             <div id="content">
                 <div className='container'>
                     {@props.children}

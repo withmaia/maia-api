@@ -42,8 +42,18 @@ a
     display: block
     color: $colors.purple
 
+input, textarea
+    display: block
+    border: none
+    padding: $paddings.small
+    text-align: left
+    background: #eaeaea
+
+    margin-top: $paddings.small
+    width: 100%
+    max-width: 400px
+
 .container
-    max-width: 1000px
     position: relative
     padding: 0px $paddings.medium
 
@@ -55,6 +65,9 @@ a
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1), 0px 2px 8px rgba(0, 0, 0, 0.05)
     display: block
     margin: $paddings.small 0px
+
+.center
+    text-align: center
 
 .nav
     padding: 0px $paddings.medium
@@ -86,16 +99,17 @@ a
 
 h1
     font: $fonts.medium
-    font-weight: 200
+    font-weight: 400
     margin-bottom: $paddings.medium_large
     color: $colors.purple
 
 .back
-    color: #333
-    position: absolute
-    left: -1px
-    top: 5px
-    font-size: 20px
+    display: inline-block
+    color: $colors.purple
+    font-size: 16px
+    padding-right: $paddings.small
+    position: relative
+    top: -4px
 
 .help
     font: $fonts.default
@@ -106,7 +120,7 @@ h1
 
 .how-to
     max-width: 400px
-    margin-bottom: $paddings.small
+    margin: $paddings.small 0px
 
 #content
     display: block
@@ -179,7 +193,7 @@ h1
 
     .token
         color: #515CA0
-        font-size: 64px
+        font-size: 49px
 
 .script-list
 
@@ -204,5 +218,35 @@ h1
 
         .actions
             float: right
+
+.touch-button
+    background: $colors.purple
+    color: white
+    padding: 16px
+    border: none
+    border-radius: 3px
+    margin: $paddings.small 0px
+    width: 100%
+    max-width: 400px
+    cursor: pointer
+
+.signup-view, .login-view
+
+    max-width: 400px
+    margin: 200px auto
+
+    font: $fonts.default
+
+    .instructions
+        color: $colors.purple
+        text-align: center
+        font-weight: bold
+
+    label
+        display: none
+
+    input
+        width: 100%
+        text-align: center
 
 @import 'graph.sass'
