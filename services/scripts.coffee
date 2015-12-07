@@ -3,15 +3,19 @@ coffee = require 'coffee-script'
 
 client = new somata.Client
 
-watchScript = ({trigger, id}) ->
+subscribed = {}
+
+watchScript = ({trigger, _id}) ->
     [service, method] = trigger.split('.')
-    client.on service, method, runScript(id)
+    subscription = client.on service, method, runScript(_id)
+    subscribed[_id] = subscription
 
-unwatchScript = ({id}) ->
-    console.log 'TODO: Unsubscribe event handler'
+unwatchScript = ({_id}) ->
+    client.unsubscribe subscribed[_id]
 
-runScript = (id) -> (data) ->
-    client.call 'maia:data', 'getScript', {id}, (err, script) ->
+runScript = (_id) -> (data) ->
+    client.call 'maia:data', 'getScript', {_id}, (err, script) ->
+        if script.disabled then return
         compiled = coffee.compile script.source, bare: true
         fn = eval compiled
         fn(data)
@@ -21,5 +25,5 @@ client.call 'maia:data', 'findScripts', {}, (err, all_scripts) ->
     all_scripts.map watchScript
 
 # Listen for created and removed scripts
-client.on 'maia:data', 'addScript', watchScript
+client.on 'maia:data', 'createScript', watchScript
 client.on 'maia:data', 'removeScript', unwatchScript
