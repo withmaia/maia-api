@@ -211,25 +211,30 @@ h1
 
     .script.item
         border: 1px solid #ddd
-        padding: 10px
+        border-radius: 3px
         margin-bottom: 10px
+        position: relative
+
+        input, textarea, button
+            margin: 0
+            border-radius: 0
 
         .name
             font-weight: bold
 
         .trigger
-            margin-left: 0.5em
             font-family: monospace
 
         .source
-            margin-top: 10px
-            margin: -10px
-            margin-top: 10px
-            padding: 10px
             background: #ddd
 
         .actions
-            float: right
+            position: absolute
+            right: 0
+
+            a
+                display: inline-block
+                padding: $padding
 
 form button
     background: $colors.purple
